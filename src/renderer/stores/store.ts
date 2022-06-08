@@ -8,7 +8,11 @@ const reducer = combineReducers({
 export const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+      thunk: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

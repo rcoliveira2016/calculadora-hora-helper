@@ -10,8 +10,9 @@ export function useCellEditCommit(props: HistoricoTempoHoraProps) {
 
   const handleCellEditCommit = useCallback(
     (params: GridCellEditCommitParams) => {
-      const item = listaHitorico.find((x) => x.id === params.id);
+      let item = listaHitorico.find((x) => x.id === params.id);
       if (!item) return;
+      item = { ...item };
       switch (params.field) {
         case 'tag':
           item.tag = params.value as string;

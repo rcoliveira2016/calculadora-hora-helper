@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ValueSeletorTempoHora } from '@/components/campos/seletor-hora/type';
+import { setarSubtarir } from '@/helpers/stores/reducers/principal';
 import { useCalcularHoraRepository } from '@/service/historico-tempo-horas/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPrincipalState, ItemHistoricoTempoHora } from './type';
@@ -9,7 +10,12 @@ const calcularHoraRepository = useCalcularHoraRepository();
 const setarItensHistorico = (
   itens: ItemHistoricoTempoHora[]
 ): ItemHistoricoTempoHora[] => {
-  return calcularHoraRepository.AddAllHistorico(itens);
+  const novoItens = itens.map((x) => {
+    const itemNovo = { ...x };
+    setarSubtarir(itemNovo);
+    return itemNovo;
+  });
+  return calcularHoraRepository.AddAllHistorico(novoItens);
 };
 
 const initialState: IPrincipalState = {
@@ -67,6 +73,20 @@ export const principalSlice = createSlice({
           : x
       );
       state.valores = setarItensHistorico(lista);
+    },
+    removerItemHistorico: (
+      state: IPrincipalState,
+      action: PayloadAction<ItemHistoricoTempoHora>
+    ) => {
+      const valorState = state.valores.find(
+        (x) =>
+          x.dataInclusao.getTime() === action.payload.dataInclusao.getTime()
+      );
+      if (!valorState) return;
+
+      const a = [...state.valores];
+      a.splice(state.valores.indexOf(valorState), 1);
+      state.valores = setarItensHistorico(a);
     },
   },
 });

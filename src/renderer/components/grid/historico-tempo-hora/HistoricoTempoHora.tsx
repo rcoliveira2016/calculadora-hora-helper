@@ -51,31 +51,8 @@ export default function HistoricoTempoHora(props: HistoricoTempoHoraProps) {
 
     const handleCellEditCommit = useCellEditCommit(props);
 
-    function calcularValoresHorasTotais() {
-      return (
-        rows.reduce(
-          (partialSum, a) =>
-            partialSum + (parseFloat(a.fDecimal) - (a.subtrair ?? 0)),
-          0
-        ) ?? 0
-      );
-    }
-
-    function calcularHorasTotais() {
-      return calcularValoresHorasTotais().toFixed(2);
-    }
-    function calculaFormatorHorasTotais() {
-      return SeletorTempoHoraHelper.formatarJiraPorDecimal(
-        calcularValoresHorasTotais()
-      );
-    }
-
     return (
       <Box sx={TemaGridSubtraido} style={{ height: 400, width: 800 }}>
-        <div>
-          <span>Horas Totais: </span>
-          <b>{calcularHorasTotais()}</b> - <b>{calculaFormatorHorasTotais()}</b>
-        </div>
         <DataGrid
           initialState={{
             columns: {

@@ -62,7 +62,11 @@ class DateHelperInstance {
   }
 
   getMillisecondToDecimalHours(duration: number) {
-    return (duration / (1000 * 60 * 60)).toFixed(2);
+    return this.getMillisecondToDecimalHoursNumber(duration).toFixed(2);
+  }
+
+  getMillisecondToDecimalHoursNumber(duration: number) {
+    return duration / (1000 * 60 * 60);
   }
 
   msToTime(duration: number, heNegativo = false) {
@@ -75,7 +79,7 @@ class DateHelperInstance {
     const strHours = this.formatNumberHours(hours);
     const strMinutes = this.formatNumberMinuts(minutes);
 
-    return `${heNegativo ? "-" : ""}${strHours}:${strMinutes}`;
+    return `${heNegativo ? '-' : ''}${strHours}:${strMinutes}`;
   }
 }
 

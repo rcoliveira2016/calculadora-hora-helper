@@ -1,9 +1,14 @@
 import HistoricoTempoHora from '@/components/grid/historico-tempo-hora/HistoricoTempoHora';
 import { RowHistoricoTempoHora } from '@/components/grid/historico-tempo-hora/type';
+import {
+  calcularHorasTotaisFormatoDecimal,
+  calcularHorasTotaisFormatoJira,
+} from '@/helpers/stores/reducers/principal';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import {
   atualizarItemHistorico,
   carregarListaHistorico,
+  removerItemHistorico,
 } from '@/stores/reducers/principal';
 import { ItemHistoricoTempoHora } from '@/stores/reducers/principal/type';
 import Grid from '@mui/material/Grid';
@@ -16,8 +21,7 @@ export function AbaRegistrarHorasGridContainer() {
     const valorState = state.valores.find(
       (x) => x.dataInclusao.getTime() === item.dataInclusao.getTime()
     );
-    if (valorState)
-      dispatch({ type: 'removerItemHistorico', payload: { item: valorState } });
+    if (valorState) dispatch(removerItemHistorico(valorState));
   }
   useEffect(() => {
     dispatch(carregarListaHistorico());
@@ -29,6 +33,13 @@ export function AbaRegistrarHorasGridContainer() {
     },
     [dispatch]
   );
+
+  function calcularHorasTotais() {
+    return calcularHorasTotaisFormatoDecimal(state.valores);
+  }
+  function calculaFormatorHorasTotais() {
+    return calcularHorasTotaisFormatoJira(state.valores);
+  }
   return (
     <Grid
       container
@@ -37,6 +48,12 @@ export function AbaRegistrarHorasGridContainer() {
         mt: 1,
       }}
     >
+      <Grid item>
+        <div>
+          <span>Horas Totais: </span>
+          <b>{calcularHorasTotais()}</b> - <b>{calculaFormatorHorasTotais()}</b>
+        </div>
+      </Grid>
       <Grid item>
         <HistoricoTempoHora
           onRemove={onRemove}

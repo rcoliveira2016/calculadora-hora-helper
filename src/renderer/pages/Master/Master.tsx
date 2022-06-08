@@ -8,7 +8,6 @@ import { MenuWindowns } from '@/components/windowns/Menus/MenuWindowns';
 import { Outlet } from 'react-router-dom';
 
 export default function Master() {
-  console.log('Master');
   return (
     <div>
       <MenuWindowns />

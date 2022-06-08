@@ -10,5 +10,6 @@ export const {
   subtituirValorHoraInicio,
   carregarListaHistorico,
   atualizarItemHistorico,
+  removerItemHistorico,
 } = principalSlice.actions;
 export default principalSlice.reducer;

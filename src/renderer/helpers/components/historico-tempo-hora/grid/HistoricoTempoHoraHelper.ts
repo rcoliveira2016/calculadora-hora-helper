@@ -13,20 +13,14 @@ export class HistoricoTempoHoraHelper {
     const tempoEmDecimal = DateHelper.getMillisecondToDeciamlNumber(
       DateHelper.hourstoMinutesToMilliseconds(0, tempoEmMunitos)
     );
-    console.log(
-      tempoEmDecimal,
-      tempoEmMunitos,
-      item.inicio.hora <= 12,
-      item.final.hora >= 12,
-      item.final.minuto >= tempoEmMunitos,
-      item
-    );
+
     if (
       item.inicio.hora <= 12 &&
       ((item.final.hora >= 12 && item.final.minuto >= tempoEmMunitos) ||
         item.final.hora > 12)
-    )
+    ) {
       item.subtrair = tempoEmDecimal;
+    }
   }
 
   static craeteRow(item: ItemHistoricoTempoHora): RowHistoricoTempoHora {
@@ -36,7 +30,7 @@ export class HistoricoTempoHoraHelper {
     const final = DateHelper.msToTime(
       SeletorTempoHoraHelper.toMilliseconds(item.final)
     );
-    this.setarSubtarir(item);
+    // this.setarSubtarir(item);
     const acao =
       item.tipoAcao === AcoesCalculoData.adicao ? 'Adição' : 'Subtração';
     const total = SeletorTempoHoraHelper.calcularData(
