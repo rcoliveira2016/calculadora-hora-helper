@@ -3,13 +3,13 @@ import { ValueSeletorTempoHora } from '@/components/campos/seletor-hora/type';
 import { setarSubtarir } from '@/helpers/stores/reducers/principal';
 import { useCalcularHoraRepository } from '@/service/historico-tempo-horas/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPrincipalState, ItemHistoricoTempoHora } from './type';
+import { IPrincipalState, ItemHistoricoTempoHoraModelState } from './type';
 
 const calcularHoraRepository = useCalcularHoraRepository();
 
 const setarItensHistorico = (
-  itens: ItemHistoricoTempoHora[]
-): ItemHistoricoTempoHora[] => {
+  itens: ItemHistoricoTempoHoraModelState[]
+): ItemHistoricoTempoHoraModelState[] => {
   const novoItens = itens.map((x) => {
     const itemNovo = { ...x };
     setarSubtarir(itemNovo);
@@ -33,7 +33,7 @@ export const principalSlice = createSlice({
     },
     adicionarItemHistorico: (
       state: IPrincipalState,
-      action: PayloadAction<ItemHistoricoTempoHora>
+      action: PayloadAction<ItemHistoricoTempoHoraModelState>
     ) => {
       state.valores = setarItensHistorico([...state.valores, action.payload]);
     },
@@ -65,18 +65,16 @@ export const principalSlice = createSlice({
     },
     atualizarItemHistorico: (
       state: IPrincipalState,
-      action: PayloadAction<ItemHistoricoTempoHora>
+      action: PayloadAction<ItemHistoricoTempoHoraModelState>
     ) => {
       const lista = state.valores.map((x) =>
-        x.dataInclusao.getTime() === action.payload.dataInclusao.getTime()
-          ? action.payload
-          : x
+        x.id === action.payload.id ? action.payload : x
       );
       state.valores = setarItensHistorico(lista);
     },
     removerItemHistorico: (
       state: IPrincipalState,
-      action: PayloadAction<ItemHistoricoTempoHora>
+      action: PayloadAction<ItemHistoricoTempoHoraModelState>
     ) => {
       const valorState = state.valores.find(
         (x) =>

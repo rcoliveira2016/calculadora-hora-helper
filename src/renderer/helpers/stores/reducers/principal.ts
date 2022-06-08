@@ -1,9 +1,9 @@
 import { DateHelper } from '@/helpers/common/date';
 import { SeletorTempoHoraHelper } from '@/helpers/components/campos/seletor-hora';
-import { ItemHistoricoTempoHora } from '@/stores/reducers/principal/type';
+import { ItemHistoricoTempoHoraModelState } from '@/stores/reducers/principal/type';
 
 export const calcularValoresHorasTotaisMilisegundos = (
-  itens: ItemHistoricoTempoHora[]
+  itens: ItemHistoricoTempoHoraModelState[]
 ): number => {
   return itens.reduce((acc, item) => {
     let valorTotalMisseconds = SeletorTempoHoraHelper.obterValorData(
@@ -23,14 +23,14 @@ export const calcularValoresHorasTotaisMilisegundos = (
 };
 
 export function calcularHorasTotaisFormatoDecimal(
-  itens: ItemHistoricoTempoHora[]
+  itens: ItemHistoricoTempoHoraModelState[]
 ) {
   return DateHelper.getMillisecondToDecimalHours(
     calcularValoresHorasTotaisMilisegundos(itens)
   );
 }
 export function calcularHorasTotaisFormatoJira(
-  itens: ItemHistoricoTempoHora[]
+  itens: ItemHistoricoTempoHoraModelState[]
 ) {
   return SeletorTempoHoraHelper.formatarJiraPorDecimal(
     DateHelper.getMillisecondToDecimalHoursNumber(
@@ -39,7 +39,7 @@ export function calcularHorasTotaisFormatoJira(
   );
 }
 
-export const setarSubtarir = (item: ItemHistoricoTempoHora) => {
+export const setarSubtarir = (item: ItemHistoricoTempoHoraModelState) => {
   if (item.subtrair !== undefined) return;
 
   const tempoEmMunitos = 20;

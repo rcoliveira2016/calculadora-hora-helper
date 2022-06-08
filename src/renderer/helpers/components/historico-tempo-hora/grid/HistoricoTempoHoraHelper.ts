@@ -2,11 +2,11 @@ import { ValueSeletorTempoHora } from '@/components/campos/seletor-hora/type';
 import { RowHistoricoTempoHora } from '@/components/grid/historico-tempo-hora/type';
 import { DateHelper } from '@/helpers/common/date';
 import { AcoesCalculoData } from '@/pages/Principal/abas/registrar-horas/type';
-import { ItemHistoricoTempoHora } from '@/stores/reducers/principal/type';
+import { ItemHistoricoTempoHoraModelState } from '@/stores/reducers/principal/type';
 import { SeletorTempoHoraHelper } from '@/helpers/components/campos/seletor-hora/';
 
 export class HistoricoTempoHoraHelper {
-  static setarSubtarir(item: ItemHistoricoTempoHora) {
+  static setarSubtarir(item: ItemHistoricoTempoHoraModelState) {
     if (item.subtrair !== undefined) return;
 
     const tempoEmMunitos = 20;
@@ -23,7 +23,9 @@ export class HistoricoTempoHoraHelper {
     }
   }
 
-  static craeteRow(item: ItemHistoricoTempoHora): RowHistoricoTempoHora {
+  static craeteRow(
+    item: ItemHistoricoTempoHoraModelState
+  ): RowHistoricoTempoHora {
     const inicio = DateHelper.msToTime(
       SeletorTempoHoraHelper.toMilliseconds(item.inicio)
     );

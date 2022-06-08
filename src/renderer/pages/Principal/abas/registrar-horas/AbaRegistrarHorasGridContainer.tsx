@@ -10,7 +10,7 @@ import {
   carregarListaHistorico,
   removerItemHistorico,
 } from '@/stores/reducers/principal';
-import { ItemHistoricoTempoHora } from '@/stores/reducers/principal/type';
+import { ItemHistoricoTempoHoraModelState } from '@/stores/reducers/principal/type';
 import Grid from '@mui/material/Grid';
 import { useCallback, useEffect } from 'react';
 
@@ -18,9 +18,7 @@ export function AbaRegistrarHorasGridContainer() {
   const dispatch = useAppDispatch();
   const state = useAppSelector((stateApp) => stateApp.principalReducer);
   function onRemove(item: RowHistoricoTempoHora) {
-    const valorState = state.valores.find(
-      (x) => x.dataInclusao.getTime() === item.dataInclusao.getTime()
-    );
+    const valorState = state.valores.find((x) => x.id === item.id);
     if (valorState) dispatch(removerItemHistorico(valorState));
   }
   useEffect(() => {
@@ -28,7 +26,7 @@ export function AbaRegistrarHorasGridContainer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const onEdit = useCallback(
-    (item: ItemHistoricoTempoHora) => {
+    (item: ItemHistoricoTempoHoraModelState) => {
       dispatch(atualizarItemHistorico(item));
     },
     [dispatch]
