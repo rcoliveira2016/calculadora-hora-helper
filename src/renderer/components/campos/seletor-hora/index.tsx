@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DateHelper } from '@/helpers/common/date/';
+import { useTheme } from '@mui/material';
 import { EventSeletorTempoHora, ValueSeletorTempoHora } from './type';
 import './estilo.css';
 
@@ -9,12 +10,25 @@ interface SeletorTempoHoraProps {
 }
 
 export default function SeletorTempoHora(props: SeletorTempoHoraProps) {
+  const theme = useTheme();
+
   const [focusStyle, setFocusStyle] = useState<Record<string, string>>({});
   const [minutos, setMinutos] = useState<string>('');
   const [horas, setHoras] = useState<string>('');
   const inputMinuts = useRef<HTMLInputElement>(null);
   const { onChange, valor } = props;
   const calledOnce = React.useRef<NodeJS.Timeout>();
+
+  const themaInput = React.useMemo<React.CSSProperties>(
+    () =>
+      ({
+        '--color-primary': theme.palette.primary.main,
+        '--color-secondary': theme.palette.secondary.main,
+        '--color-font': theme.palette.text.primary,
+        '--color-border': theme.palette.divider,
+      } as React.CSSProperties),
+    [theme]
+  );
 
   function foramatarNumero() {
     setTimeout(() => {
@@ -38,7 +52,7 @@ export default function SeletorTempoHora(props: SeletorTempoHoraProps) {
     calledOnce.current = setTimeout(() => {
       setHoras(DateHelper.formatNumberHours(valor.hora));
       setMinutos(DateHelper.formatNumberMinuts(valor.minuto));
-    }, 800);
+    }, 600);
   }, [valor]);
 
   const obterValorEvento = (
@@ -119,7 +133,7 @@ export default function SeletorTempoHora(props: SeletorTempoHoraProps) {
       tabIndex={-1}
       className="CalcularHoraContainer"
       onKeyDown={handleKeyDown}
-      style={focusStyle}
+      style={{ ...focusStyle, ...themaInput }}
     >
       <input
         maxLength={2}

@@ -2,13 +2,17 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ptBR } from '@mui/x-data-grid';
 import Master from '@/pages/Master/Master';
-import { createMuiThemePadrao } from './styles/mui/theme';
-
-const theme = createTheme(createMuiThemePadrao, ptBR);
+import { useAppSelector } from '@/stores/hooks';
+import { useMemo } from 'react';
 
 const App = () => {
+  const { thema: themaConfig } = useAppSelector(
+    (state) => state.masterReducer.themaAtual
+  );
+  const thema = useMemo(() => createTheme(themaConfig, ptBR), [themaConfig]);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={thema}>
       <CssBaseline />
       <Master />
     </ThemeProvider>

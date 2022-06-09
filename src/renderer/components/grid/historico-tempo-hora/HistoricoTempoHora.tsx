@@ -9,7 +9,6 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from '@mui/x-data-grid';
-import { SeletorTempoHoraHelper } from '@/helpers/components/campos/seletor-hora';
 import { HistoricoTempoHoraHelper } from '@/helpers/components/historico-tempo-hora/grid/HistoricoTempoHoraHelper';
 import {
   HistoricoTempoHoraProps,

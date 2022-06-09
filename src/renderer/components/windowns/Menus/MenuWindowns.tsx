@@ -1,5 +1,8 @@
-import { Button, Grid, styled } from '@mui/material';
+import { Button, Grid, IconButton, styled } from '@mui/material';
 import { red, yellow } from '@mui/material/colors';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from 'react';
+import MenuWindownsDrawer from './MenuWindownsDrawer';
 
 const styleButton: React.CSSProperties = {
   borderRadius: '50%',
@@ -32,6 +35,8 @@ const ButtonRoundYellow = styled(Button)({
 });
 
 export function MenuWindowns() {
+  const [abrirMenu, setAbrirMenu] = useState(false);
+
   function closeWindow() {
     const { ipcRenderer } = window.electron;
     ipcRenderer.sendMessage('closedApp', []);
@@ -43,16 +48,30 @@ export function MenuWindowns() {
   }
 
   return (
-    <Grid
-      container
-      className="drag-app-region"
-      style={{ background: '#403f3f' }}
-      justifyContent={'flex-end'}
-    >
-      <Grid item>
-        <ButtonRoundYellow onClick={minimizeWindow} />
-        <ButtonRoundRed onClick={closeWindow} />
+    <>
+      <Grid
+        container
+        className="drag-app-region"
+        style={{ background: '#403f3f' }}
+        justifyContent={'space-between'}
+      >
+        <Grid item>
+          <IconButton
+            sx={{ ml: 2 }}
+            size="medium"
+            edge="start"
+            aria-label="menu"
+            onClick={() => setAbrirMenu(true)}
+          >
+            <MenuIcon htmlColor="#fff" />
+          </IconButton>
+        </Grid>
+        <Grid item>
+          <ButtonRoundYellow onClick={minimizeWindow} />
+          <ButtonRoundRed onClick={closeWindow} />
+        </Grid>
       </Grid>
-    </Grid>
+      <MenuWindownsDrawer abrir={abrirMenu} setAbrir={setAbrirMenu} />
+    </>
   );
 }

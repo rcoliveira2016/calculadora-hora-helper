@@ -9,11 +9,11 @@ const getHoverBackgroundColor = (color: string, mode: string) =>
 export const TemaGridSubtraido: SxProps<Theme> = {
   '& .super-app-theme--subtraido': {
     bgcolor: (theme) =>
-      getBackgroundColor(theme.palette.warning.light, theme.palette.mode),
+      getBackgroundColor(theme.palette.primary.light, theme.palette.mode),
     '&:hover': {
       bgcolor: (theme) =>
         getHoverBackgroundColor(
-          theme.palette.warning.light,
+          theme.palette.primary.light,
           theme.palette.mode
         ),
     },

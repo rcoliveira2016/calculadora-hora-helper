@@ -5,6 +5,7 @@ import App from '@/App';
 import PrincipalPage from '@/pages/Principal/Principal';
 import './styles/index.css';
 import { Provider } from 'react-redux';
+import ConfiguracoesPage from '@/pages/Configuracoes/Configuracoes';
 import { store } from './stores/store';
 
 const root = createRoot(document.getElementById('root') as Element);
@@ -15,6 +16,7 @@ root.render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<PrincipalPage />} />
+            <Route path="configuracoes" element={<ConfiguracoesPage />} />
           </Route>
         </Routes>
       </MemoryRouter>
