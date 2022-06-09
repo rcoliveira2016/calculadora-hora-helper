@@ -50,7 +50,9 @@ export default function SeletorThema(props: ISeletorThemaProps) {
       ...themeAtual.typography.body2,
       padding: themeAtual.spacing(2),
       textAlign: 'center',
-      color: themeAtual.palette.text.secondary,
+      color: themeAtual.palette.getContrastText(
+        themeAtual.palette.primary.main
+      ),
       borderRadius: 0,
     };
   });
@@ -63,7 +65,9 @@ export default function SeletorThema(props: ISeletorThemaProps) {
       ...themeAtual.typography.body2,
       padding: themeAtual.spacing(2),
       textAlign: 'center',
-      color: themeAtual.palette.text.secondary,
+      color: themeAtual.palette.getContrastText(
+        themeAtual.palette.secondary.main
+      ),
       borderRadius: 0,
     };
   });

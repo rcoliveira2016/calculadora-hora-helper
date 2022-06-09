@@ -43,8 +43,12 @@ export const masterSlice = createSlice({
     },
     setarDarkMode: (state: IMasterState, action: PayloadAction<boolean>) => {
       state.themaAtual.heDarkMode = action.payload;
-      state.themaAtual.thema = createMuiThemePadrao(
-        state.themaAtual.heDarkMode
+      state.themaAtual.thema = OpcoesMuiThemes[state.themaAtual.nomeThema](
+        action.payload
+      );
+      setarMuiThemeConfig(
+        state.themaAtual.heDarkMode,
+        state.themaAtual.nomeThema
       );
     },
   },
