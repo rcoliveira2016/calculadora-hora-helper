@@ -1,24 +1,17 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { useConfiguracaoesParametrosRepository } from '@/service/configuracoes-parametros';
 import { useMuiThemeConfigRepository } from '@/service/mui-thema-config';
-import { createMuiThemePadrao, OpcoesMuiThemes } from '@/styles/mui/theme';
+import { OpcoesMuiThemes } from '@/styles/mui/theme';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IMasterState, ISetarConfiguracaoTemaPayload } from './type';
+import { initialState } from './initial-state';
+import {
+  IMasterState,
+  IParametrosMasterState,
+  ISetarConfiguracaoTemaPayload,
+} from './type';
 
 const muiThemeConfigRepository = useMuiThemeConfigRepository();
-const config = muiThemeConfigRepository.obter();
-const initialState: IMasterState = {
-  themaAtual: config
-    ? {
-        heDarkMode: config.ehModoDark,
-        nomeThema: config.nomeTheme,
-        thema: OpcoesMuiThemes[config.nomeTheme](config.ehModoDark),
-      }
-    : {
-        heDarkMode: false,
-        thema: createMuiThemePadrao(false),
-        nomeThema: 'Padrão',
-      },
-};
+const { salvar: setarParametros } = useConfiguracaoesParametrosRepository();
 
 const setarMuiThemeConfig = (heDarkMode: boolean, nomeThema: string) => {
   muiThemeConfigRepository.salvar({
@@ -50,6 +43,13 @@ export const masterSlice = createSlice({
         state.themaAtual.heDarkMode,
         state.themaAtual.nomeThema
       );
+    },
+    atualizarParametros: (
+      state: IMasterState,
+      action: PayloadAction<IParametrosMasterState>
+    ) => {
+      state.parametros = action.payload;
+      setarParametros(state.parametros);
     },
   },
 });

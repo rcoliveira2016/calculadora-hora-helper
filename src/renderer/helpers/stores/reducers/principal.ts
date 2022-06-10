@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { DateHelper } from '@/helpers/common/date';
 import { SeletorTempoHoraHelper } from '@/helpers/components/campos/seletor-hora';
 import { ItemHistoricoTempoHoraModelState } from '@/stores/reducers/principal/type';
+import { useObterStateConfiguracoesParametros } from '../../service/configuracoes-parametros';
 
 export const calcularValoresHorasTotaisMilisegundos = (
   itens: ItemHistoricoTempoHoraModelState[]
@@ -42,7 +44,8 @@ export function calcularHorasTotaisFormatoJira(
 export const setarSubtarir = (item: ItemHistoricoTempoHoraModelState) => {
   if (item.subtrair !== undefined) return;
 
-  const tempoEmMunitos = 20;
+  const parametros = useObterStateConfiguracoesParametros();
+  const tempoEmMunitos = parametros.minutosParaSubtrairAlmoco;
   const tempoEmDecimal = DateHelper.getMillisecondToDeciamlNumber(
     DateHelper.hourstoMinutesToMilliseconds(0, tempoEmMunitos)
   );
@@ -54,4 +57,18 @@ export const setarSubtarir = (item: ItemHistoricoTempoHoraModelState) => {
   ) {
     item.subtrair = tempoEmDecimal;
   }
+};
+
+export const aplicarRegrasHistorico = (
+  itens: ItemHistoricoTempoHoraModelState[]
+): ItemHistoricoTempoHoraModelState[] => {
+  const parametros = useObterStateConfiguracoesParametros();
+  if (parametros.subtrairAlmoco)
+    return itens.map((x) => {
+      const itemNovo = { ...x };
+      setarSubtarir(itemNovo);
+      return itemNovo;
+    });
+
+  return itens;
 };

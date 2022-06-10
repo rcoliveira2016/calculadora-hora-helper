@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ValueSeletorTempoHora } from '@/components/campos/seletor-hora/type';
-import { setarSubtarir } from '@/helpers/stores/reducers/principal';
+import { aplicarRegrasHistorico } from '@/helpers/stores/reducers/principal';
 import { useCalcularHoraRepository } from '@/service/historico-tempo-horas/index';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPrincipalState, ItemHistoricoTempoHoraModelState } from './type';
@@ -10,11 +10,7 @@ const calcularHoraRepository = useCalcularHoraRepository();
 const setarItensHistorico = (
   itens: ItemHistoricoTempoHoraModelState[]
 ): ItemHistoricoTempoHoraModelState[] => {
-  const novoItens = itens.map((x) => {
-    const itemNovo = { ...x };
-    setarSubtarir(itemNovo);
-    return itemNovo;
-  });
+  const novoItens = aplicarRegrasHistorico(itens);
   return calcularHoraRepository.AddAllHistorico(novoItens);
 };
 

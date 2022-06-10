@@ -22,9 +22,8 @@ export default function TemaConfiguracoes() {
   return (
     <Grid container flexDirection={'row'} spacing={2}>
       {listaOpcoesThema.map((opcao) => (
-        <Grid item>
+        <Grid item key={opcao}>
           <SeletorThema
-            key={opcao}
             thema={opcao}
             themaSelecionado={nomeThema}
             onSelecionado={onSelecionadoThema}

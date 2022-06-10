@@ -5,6 +5,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import { SyntheticEvent, useEffect, useState } from 'react';
 import TemaConfiguracoes from './abas/tema/TemaConfiguracoes';
+import ParametrosConfiguracoes from './abas/parametros/ParametrosConfiguracoes';
 
 export default function ConfiguracoesPage() {
   const [abaAtual, setabaAtual] = useState('1');
@@ -41,7 +42,9 @@ export default function ConfiguracoesPage() {
         <TabPanel value="1">
           <TemaConfiguracoes />
         </TabPanel>
-        <TabPanel value="2">Parametros</TabPanel>
+        <TabPanel value="2">
+          <ParametrosConfiguracoes />
+        </TabPanel>
       </TabContext>
     </Box>
   );

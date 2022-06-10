@@ -88,8 +88,8 @@ export default function SeletorTempoHora(props: SeletorTempoHoraProps) {
   );
   function onFocus(): void {
     setFocusStyle({
-      border: '1px solid #1976d2',
-      outline: '1px solid #1976d2',
+      border: '1px solid var(--color-primary)',
+      outline: '1px solid var(--color-primary)',
     });
   }
   function onBlur(): void {
