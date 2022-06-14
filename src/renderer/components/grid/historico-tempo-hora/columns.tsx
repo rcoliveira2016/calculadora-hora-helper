@@ -106,7 +106,6 @@ export function ObterColunas(props: HistoricoTempoHoraProps) {
       field: 'subtrair',
       headerName: 'subtrair',
       editable: true,
-      type: 'number',
     },
     {
       field: 'tag',

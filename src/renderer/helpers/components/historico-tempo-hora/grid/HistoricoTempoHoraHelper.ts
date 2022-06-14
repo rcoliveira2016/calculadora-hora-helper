@@ -32,7 +32,7 @@ export class HistoricoTempoHoraHelper {
     const final = DateHelper.msToTime(
       SeletorTempoHoraHelper.toMilliseconds(item.final)
     );
-    // this.setarSubtarir(item);
+
     const acao =
       item.tipoAcao === AcoesCalculoData.adicao ? 'Adição' : 'Subtração';
     const total = SeletorTempoHoraHelper.calcularData(
@@ -75,6 +75,18 @@ export class HistoricoTempoHoraHelper {
       hora: parseInt(valoresSeparados[0]),
       minuto: parseInt(valoresSeparados[1]),
     } as ValueSeletorTempoHora;
+  }
+
+  static textoParaDecimal(texto: string) {
+    if (!this.validarTextoForamatoHoraMinuto(texto)) return undefined;
+    const valoresSeparados = texto.split(':');
+
+    const hora = parseInt(valoresSeparados[0]);
+    const minuto = parseInt(valoresSeparados[1]);
+
+    return DateHelper.getMillisecondToDeciamlNumber(
+      DateHelper.hourstoMinutesToMilliseconds(hora, minuto)
+    );
   }
 
   static validarTextoForamatoHoraMinuto(texto: string) {

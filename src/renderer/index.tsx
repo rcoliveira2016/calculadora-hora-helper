@@ -7,6 +7,7 @@ import './styles/index.css';
 import { Provider } from 'react-redux';
 import ConfiguracoesPage from '@/pages/Configuracoes/Configuracoes';
 import { store } from './stores/store';
+import './App.css';
 
 const root = createRoot(document.getElementById('root') as Element);
 root.render(

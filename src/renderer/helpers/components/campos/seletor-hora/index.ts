@@ -40,14 +40,15 @@ class SeletorTempoHora {
     tipoAcaoCalculo: AcoesCalculoData,
     valorHoraFinal: ValueSeletorTempoHora,
     valorHoraInicial: ValueSeletorTempoHora,
-    subtarir?: number
+    subtarirDecinal?: number
   ): string {
     let numero = this.obterValorData(
       tipoAcaoCalculo,
       valorHoraFinal,
       valorHoraInicial
     );
-    if (subtarir) numero = this.subtrairDecimalEmMilliseconds(subtarir, numero);
+    if (subtarirDecinal)
+      numero = this.subtrairDecimalEmMilliseconds(subtarirDecinal, numero);
     const heNegativo = numero < 0;
     numero = numero < 0 ? -1 * numero : numero;
     if (!numero) return '00:00';
@@ -75,7 +76,7 @@ class SeletorTempoHora {
     tipoAcaoCalculo: AcoesCalculoData,
     valorHoraFinal: ValueSeletorTempoHora,
     valorHoraInicial: ValueSeletorTempoHora,
-    subtarir?: number
+    subtarirDecinal?: number
   ): string {
     let numero = this.obterValorData(
       tipoAcaoCalculo,
@@ -83,7 +84,8 @@ class SeletorTempoHora {
       valorHoraInicial
     );
 
-    if (subtarir) numero = this.subtrairDecimalEmMilliseconds(subtarir, numero);
+    if (subtarirDecinal)
+      numero = this.subtrairDecimalEmMilliseconds(subtarirDecinal, numero);
     numero = numero < 0 ? -1 * numero : numero;
     if (!numero) return '0h 0m';
 
@@ -100,14 +102,15 @@ class SeletorTempoHora {
     tipoAcaoCalculo: AcoesCalculoData,
     valorHoraFinal: ValueSeletorTempoHora,
     valorHoraInicial: ValueSeletorTempoHora,
-    subtarir?: number
+    subtarirDecinal?: number
   ): string {
     let numero = this.obterValorData(
       tipoAcaoCalculo,
       valorHoraFinal,
       valorHoraInicial
     );
-    if (subtarir) numero = this.subtrairDecimalEmMilliseconds(subtarir, numero);
+    if (subtarirDecinal)
+      numero = this.subtrairDecimalEmMilliseconds(subtarirDecinal, numero);
     return DateHelper.getMillisecondToDecimalHours(numero);
   }
 
