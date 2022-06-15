@@ -42,7 +42,7 @@ export default function SeletorThema(props: ISeletorThemaProps) {
       : '',
   };
 
-  const ItemPrimary = styled(Paper)(({ theme }) => {
+  const ItemPrimary = styled(Paper)(() => {
     if (!themeAtual) return {};
 
     return {
@@ -57,7 +57,7 @@ export default function SeletorThema(props: ISeletorThemaProps) {
     };
   });
 
-  const ItemSecondary = styled(Paper)(({ theme }) => {
+  const ItemSecondary = styled(Paper)(() => {
     if (!themeAtual) return {};
 
     return {

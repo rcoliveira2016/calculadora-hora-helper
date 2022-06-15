@@ -21,7 +21,8 @@ export function useCellEditCommit(props: HistoricoTempoHoraProps) {
           const valoDecimal = HistoricoTempoHoraHelper.textoParaDecimal(
             params.value as string
           );
-          item.subtrair = params.value;
+
+          item.subtrair = valoDecimal;
           break;
         case 'inicio':
           const inicio =

@@ -51,14 +51,14 @@ export default function HistoricoTempoHora(props: HistoricoTempoHoraProps) {
     const handleCellEditCommit = useCellEditCommit(props);
 
     return (
-      <Box sx={TemaGridSubtraido} style={{ height: 400, width: 800 }}>
+      <Box sx={TemaGridSubtraido} style={{ height: 400, maxWidth: 800 }}>
         <DataGrid
           initialState={{
             columns: {
               columnVisibilityModel: {
                 dataInclusao: false,
                 tipoAcao: false,
-                subtrair: false,
+                subtrair: true,
               },
             },
           }}

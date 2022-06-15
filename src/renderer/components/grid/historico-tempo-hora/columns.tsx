@@ -106,6 +106,14 @@ export function ObterColunas(props: HistoricoTempoHoraProps) {
       field: 'subtrair',
       headerName: 'subtrair',
       editable: true,
+      preProcessEditCellProps: (params) => {
+        return {
+          ...params.props,
+          error: !HistoricoTempoHoraHelper.validarTextoForamatoHoraMinuto(
+            params.props.value as string
+          ),
+        };
+      },
     },
     {
       field: 'tag',

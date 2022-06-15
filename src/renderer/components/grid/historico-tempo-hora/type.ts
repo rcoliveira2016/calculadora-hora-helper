@@ -31,5 +31,5 @@ export type RowHistoricoTempoHora = {
   dataInclusao: Date;
   id: string;
   tag: string;
-  subtrair?: number;
+  subtrair?: string;
 };

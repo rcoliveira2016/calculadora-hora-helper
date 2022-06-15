@@ -12,7 +12,7 @@ export const calculatorExpressionEval = (s: string): number => {
   try {
     const value = new Function(`return ${expression};`)() as number;
     return value ?? 0;
-  } catch (error: any) {
+  } catch {
     return 0;
   }
 };

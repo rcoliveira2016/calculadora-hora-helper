@@ -42,6 +42,7 @@ export function AbaRegistrarHorasGridContainer() {
     <Grid
       container
       spacing={2}
+      direction="column"
       sx={{
         mt: 1,
       }}

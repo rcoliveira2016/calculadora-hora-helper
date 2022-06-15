@@ -53,6 +53,9 @@ export class HistoricoTempoHoraHelper {
       item.inicio,
       item.subtrair
     );
+    const subtrair = item.subtrair
+      ? SeletorTempoHoraHelper.formatarHorarioPorDecimal(item.subtrair)
+      : undefined;
 
     return {
       inicio,
@@ -64,7 +67,7 @@ export class HistoricoTempoHoraHelper {
       dataInclusao: item.dataInclusao,
       id: item.id,
       tag: item.tag,
-      subtrair: item.subtrair,
+      subtrair,
     };
   }
 
