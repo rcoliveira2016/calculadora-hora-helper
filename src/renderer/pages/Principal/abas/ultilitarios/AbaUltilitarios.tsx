@@ -7,7 +7,7 @@ import TipoForamtacaoHora from '@/components/campos/tipo-foramtacao-hora';
 import { TipoForamtacaoHoraEnum } from '@/components/campos/tipo-foramtacao-hora/type';
 import { calculatorExpressionEval } from '@/helpers/calculator-expression';
 import { Grid, TextField } from '@mui/material';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { CalcularHoraParaDecimalHelper } from './helper';
 
 export default function AbaUltilitarios() {
@@ -20,6 +20,14 @@ export default function AbaUltilitarios() {
     hora: 10,
     minuto: 20,
   });
+  const calcularExpressao = useMemo(() => {
+    const value = calculatorExpressionEval(calucarExpressao);
+    console.log(value);
+    return CalcularHoraParaDecimalHelper.formatarValor(
+      tipoForamtacaoHoraDecimal,
+      value
+    );
+  }, [calucarExpressao, tipoForamtacaoHoraDecimal]);
 
   function onChangeHora(event: EventSeletorTempoHora) {
     setValorHora(event.valor);
@@ -30,7 +38,7 @@ export default function AbaUltilitarios() {
       valorHora
     );
   }
-  function calcularExpressao(): string {
+  function calcularExpressaoODL(): string {
     const value = calculatorExpressionEval(calucarExpressao);
 
     return CalcularHoraParaDecimalHelper.formatarValor(
@@ -38,6 +46,7 @@ export default function AbaUltilitarios() {
       value
     );
   }
+
   return (
     <>
       <Grid container spacing={2}>
@@ -73,7 +82,7 @@ export default function AbaUltilitarios() {
         </Grid>
         <Grid item alignItems={'center'} display="flex">
           <div>
-            <strong>Resultado:</strong> {calcularExpressao()}
+            <strong>Resultado:</strong> {calcularExpressao}
           </div>
         </Grid>
       </Grid>
